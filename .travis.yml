@@ -17,7 +17,19 @@ after_success:
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
     #take those images and push them to docker hub
 
+
     - docker push hwlow/multi-client
     - docker push hwlow/multi-nginx
     - docker push hwlow/multi-server
     - docker push hwlow/multi-worker
+
+deploy:
+    provider: elasticbeanstalk
+    region: us-east-2
+    app: multi-docker
+    env: multiDocker-env
+    bucket_name: elasticbeanstalk-us-east-2-213758627586
+    bucket_path: docker-multi
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
