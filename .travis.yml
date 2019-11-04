@@ -18,6 +18,7 @@ after_success:
     #take those images and push them to docker hub
 
 
+
     - docker push hwlow/multi-client
     - docker push hwlow/multi-nginx
     - docker push hwlow/multi-server
